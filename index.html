@@ -293,6 +293,10 @@
                     </div>
                     
                     <div class="flex justify-center">
+                        <button id="backToRansomBtn" class="bg-red-600 hover:bg-red-500 px-6 py-2 rounded-lg font-bold mr-4">
+    <i class="fas fa-arrow-left mr-2"></i> Back to Ransom Note
+</button>
+
                         <button id="closeRecoveryBtn" class="bg-gray-600 hover:bg-gray-500 px-6 py-2 rounded-lg font-bold">
                             <i class="fas fa-times mr-2"></i> Close
                         </button>
@@ -495,6 +499,13 @@
             closeRecoveryBtn.addEventListener('click', function() {
                 recoveryModal.style.display = 'none';
             });
+            const backToRansomBtn = document.getElementById('backToRansomBtn');
+
+backToRansomBtn.addEventListener('click', function() {
+    recoveryModal.style.display = 'none';
+    ransomModal.style.display = 'flex';
+});
+
         });
     </script>
 </body>
