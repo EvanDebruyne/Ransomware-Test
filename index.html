@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Healthcare Ransomware Attack Simulation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .terminal {
+            font-family: 'Courier New', monospace;
+            background-color: #111827;
+            color: #10B981;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+        
+        .terminal-header {
+            background-color: #1F2937;
+            padding: 0.5rem 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .terminal-body {
+            padding: 1rem;
+            height: 300px;
+            overflow-y: auto;
+        }
+        
+        .terminal-line {
+            margin-bottom: 0.5rem;
+            white-space: pre-wrap;
+        }
+        
+        .blink {
+            animation: blink 1s step-end infinite;
+        }
+        
+        @keyframes blink {
+            from, to { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .encrypted-file {
+            color: #EF4444;
+            font-weight: bold;
+        }
+        
+        .progress-bar {
+            height: 20px;
+            background-color: #1F2937;
+            border-radius: 0.25rem;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background-color: #EF4444;
+            transition: width 0.3s ease;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 100;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: #1F2937;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 600px;
+            overflow: hidden;
+        }
+        
+        .file-icon {
+            color: #3B82F6;
+        }
+        
+        .encrypted-icon {
+            color: #EF4444;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-bold mb-2">Healthcare Ransomware Attack Simulation</h1>
+            <p class="text-xl text-gray-400">Understanding the threat to patient data and critical systems</p>
+        </header>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Attack Simulation -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-biohazard mr-3 text-red-500"></i>
+                    Attack Simulation
+                </h2>
+                
+                <div class="terminal mb-6">
+                    <div class="terminal-header">
+                        <div class="flex space-x-2 mr-4">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <span>attack_terminal</span>
+                    </div>
+                    <div class="terminal-body" id="attackTerminal">
+                        <div class="terminal-line">Initializing healthcare system penetration...</div>
+                        <div class="terminal-line">Exploiting unpatched vulnerability in PACS system...</div>
+                        <div class="terminal-line">Bypassing firewall rules...</div>
+                        <div class="terminal-line">Establishing persistence...</div>
+                        <div class="terminal-line">Scanning network for valuable data...</div>
+                        <div class="terminal-line">Found 3,427 patient records and 12 critical systems</div>
+                        <div class="terminal-line">Deploying ransomware payload...</div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold mb-2">Encryption Progress</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="encryptionProgress" style="width: 0%"></div>
+                    </div>
+                    <div class="flex justify-between text-sm text-gray-400 mt-1">
+                        <span>0%</span>
+                        <span id="progressPercent">0%</span>
+                        <span>100%</span>
+                    </div>
+                </div>
+                
+                <button id="startAttackBtn" class="w-full bg-red-600 hover:bg-red-700 py-3 rounded-lg font-bold">
+                    <i class="fas fa-play mr-2"></i> Simulate Attack
+                </button>
+            </div>
+            
+            <!-- System Status -->
+            <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-hospital mr-3 text-blue-400"></i>
+                    Hospital System Status
+                </h2>
+                
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-heartbeat text-2xl mr-3 text-red-400"></i>
+                            <span class="font-semibold">Patient Monitoring</span>
+                        </div>
+                        <div class="text-sm text-gray-300" id="monitoringStatus">Operational</div>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-file-medical text-2xl mr-3 text-green-400"></i>
+                            <span class="font-semibold">EHR System</span>
+                        </div>
+                        <div class="text-sm text-gray-300" id="ehrStatus">Operational</div>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-flask text-2xl mr-3 text-purple-400"></i>
+                            <span class="font-semibold">Lab Results</span>
+                        </div>
+                        <div class="text-sm text-gray-300" id="labStatus">Operational</div>
+                    </div>
+                    <div class="bg-gray-700 p-4 rounded-lg">
+                        <div class="flex items-center mb-2">
+                            <i class="fas fa-procedures text-2xl mr-3 text-yellow-400"></i>
+                            <span class="font-semibold">Scheduling</span>
+                        </div>
+                        <div class="text-sm text-gray-300" id="schedulingStatus">Operational</div>
+                    </div>
+                </div>
+                
+                <h3 class="text-lg font-semibold mb-2">Critical Files</h3>
+                <div class="bg-gray-700 p-4 rounded-lg">
+                    <div class="grid grid-cols-3 gap-4" id="fileSystem">
+                        <div class="file-item">
+                            <i class="fas fa-file-medical-alt file-icon"></i>
+                            <span>patient_001.pdf</span>
+                        </div>
+                        <div class="file-item">
+                            <i class="fas fa-file-medical-alt file-icon"></i>
+                            <span>patient_002.pdf</span>
+                        </div>
+                        <div class="file-item">
+                            <i class="fas fa-file-medical-alt file-icon"></i>
+                            <span>patient_003.pdf</span>
+                        </div>
+                        <div class="file-item">
+                            <i class="fas fa-file-medical-alt file-icon"></i>
+                            <span>lab_results.xlsx</span>
+                        </div>
+                        <div class="file-item">
+                            <i class="fas fa-file-medical-alt file-icon"></i>
+                            <span>imaging_scan.dcm</span>
+                        </div>
+                        <div class="file-item">
+                            <i class="fas fa-file-medical-alt file-icon"></i>
+                            <span>prescriptions.db</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Ransom Note -->
+        <div id="ransomModal" class="modal">
+            <div class="modal-content">
+                <div class="bg-red-900 p-4">
+                    <h2 class="text-2xl font-bold text-center">YOUR DATA HAS BEEN ENCRYPTED!</h2>
+                </div>
+                <div class="p-6">
+                    <div class="terminal mb-6">
+                        <div class="terminal-header">
+                            <span>ransom_note.txt</span>
+                        </div>
+                        <div class="terminal-body">
+                            <div class="terminal-line">All your important files have been encrypted!</div>
+                            <div class="terminal-line">Your patient records, medical images, and databases are now inaccessible.</div>
+                            <div class="terminal-line"></div>
+                            <div class="terminal-line">To recover your data, you must pay 50 Bitcoin (~$1,000,000 USD).</div>
+                            <div class="terminal-line">You have 72 hours to pay or all data will be permanently deleted.</div>
+                            <div class="terminal-line"></div>
+                            <div class="terminal-line">There is no other way to recover your files.</div>
+                            <div class="terminal-line">Do not contact law enforcement or we will delete everything immediately.</div>
+                            <div class="terminal-line"></div>
+                            <div class="terminal-line">Payment instructions will be sent after clicking "Contact Us".</div>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <button id="payRansomBtn" class="bg-red-600 hover:bg-red-700 py-3 rounded-lg font-bold">
+                            <i class="fas fa-money-bill-wave mr-2"></i> Pay Ransom
+                        </button>
+                        <button id="contactBtn" class="bg-yellow-600 hover:bg-yellow-700 py-3 rounded-lg font-bold">
+                            <i class="fas fa-comment-dots mr-2"></i> Contact Us
+                        </button>
+                        <button id="recoverBtn" class="bg-blue-600 hover:bg-blue-700 py-3 rounded-lg font-bold">
+                            <i class="fas fa-user-shield mr-2"></i> Contact Cybersecurity
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Recovery Options -->
+        <div id="recoveryModal" class="modal">
+            <div class="modal-content">
+                <div class="bg-blue-900 p-4">
+                    <h2 class="text-2xl font-bold text-center">RECOVERY OPTIONS</h2>
+                </div>
+                <div class="p-6">
+                    <div class="mb-6">
+                        <h3 class="text-xl font-semibold mb-3">Healthcare Ransomware Response</h3>
+                        
+                        <div id="payOption" class="bg-gray-700 p-4 rounded-lg mb-4">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <i class="fas fa-money-bill-wave mr-2 text-yellow-500"></i>
+                                Paying the Ransom
+                            </h4>
+                            <ul class="list-disc pl-5 text-gray-300 space-y-1">
+                                <li>~45% of healthcare organizations pay the ransom</li>
+                                <li>Average payment: $1.5M (2023 healthcare average)</li>
+                                <li>Only 65% get their data back after paying</li>
+                                <li>80% of payers get attacked again within a year</li>
+                                <li>May violate OFAC regulations (potential fines)</li>
+                            </ul>
+                        </div>
+                        
+                        <div id="recoverOption" class="bg-gray-700 p-4 rounded-lg">
+                            <h4 class="font-bold text-lg mb-2 flex items-center">
+                                <i class="fas fa-user-shield mr-2 text-blue-500"></i>
+                                Cybersecurity Recovery
+                            </h4>
+                            <ul class="list-disc pl-5 text-gray-300 space-y-1">
+                                <li>Activate incident response team immediately</li>
+                                <li>Isolate infected systems to prevent spread</li>
+                                <li>Restore from offline backups (if available)</li>
+                                <li>Forensic analysis to identify attack vector</li>
+                                <li>Report to authorities (FBI, HHS, etc.)</li>
+                                <li>Average recovery cost: $2.1M (without paying ransom)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="flex justify-center">
+                        <button id="closeRecoveryBtn" class="bg-gray-600 hover:bg-gray-500 px-6 py-2 rounded-lg font-bold">
+                            <i class="fas fa-times mr-2"></i> Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Statistics Section -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg mb-8">
+            <h2 class="text-2xl font-bold mb-6 text-center">Healthcare Ransomware Statistics</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-gray-700 p-4 rounded-lg">
+                    <div class="text-5xl font-bold text-red-400 mb-2">93%</div>
+                    <div class="text-gray-300">of healthcare organizations experienced a data breach in the past 3 years</div>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-lg">
+                    <div class="text-5xl font-bold text-yellow-400 mb-2">48h</div>
+                    <div class="text-gray-300">average downtime for hospitals after ransomware attacks</div>
+                </div>
+                <div class="bg-gray-700 p-4 rounded-lg">
+                    <div class="text-5xl font-bold text-green-400 mb-2">300%</div>
+                    <div class="text-gray-300">increase in healthcare ransomware attacks since 2020</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Protection Measures -->
+        <div class="bg-gray-800 p-6 rounded-lg shadow-lg">
+            <h2 class="text-2xl font-bold mb-6 text-center">Healthcare Cybersecurity Best Practices</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gray-700 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center">
+                        <i class="fas fa-shield-alt text-blue-400 mr-3"></i>
+                        Preventive Measures
+                    </h3>
+                    <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                        <li>Regular staff training on phishing and social engineering</li>
+                        <li>Strict patch management for all medical devices and systems</li>
+                        <li>Network segmentation to isolate critical systems</li>
+                        <li>Multi-factor authentication for all remote access</li>
+                        <li>Continuous vulnerability scanning and penetration testing</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-gray-700 p-4 rounded-lg">
+                    <h3 class="text-xl font-semibold mb-3 flex items-center">
+                        <i class="fas fa-first-aid text-red-400 mr-3"></i>
+                        Response Planning
+                    </h3>
+                    <ul class="list-disc pl-5 text-gray-300 space-y-2">
+                        <li>Maintain offline, encrypted backups of all critical data</li>
+                        <li>Develop and regularly test incident response plans</li>
+                        <li>Establish relationships with cybersecurity firms before attacks</li>
+                        <li>Know legal reporting requirements (HIPAA, state laws)</li>
+                        <li>Prepare downtime procedures for clinical operations</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // DOM elements
+            const startAttackBtn = document.getElementById('startAttackBtn');
+            const attackTerminal = document.getElementById('attackTerminal');
+            const encryptionProgress = document.getElementById('encryptionProgress');
+            const progressPercent = document.getElementById('progressPercent');
+            const fileSystem = document.getElementById('fileSystem');
+            const ransomModal = document.getElementById('ransomModal');
+            const recoveryModal = document.getElementById('recoveryModal');
+            const payRansomBtn = document.getElementById('payRansomBtn');
+            const contactBtn = document.getElementById('contactBtn');
+            const recoverBtn = document.getElementById('recoverBtn');
+            const closeRecoveryBtn = document.getElementById('closeRecoveryBtn');
+            
+            // System status elements
+            const monitoringStatus = document.getElementById('monitoringStatus');
+            const ehrStatus = document.getElementById('ehrStatus');
+            const labStatus = document.getElementById('labStatus');
+            const schedulingStatus = document.getElementById('schedulingStatus');
+            
+            // Attack simulation
+            startAttackBtn.addEventListener('click', function() {
+                startAttackBtn.disabled = true;
+                startAttackBtn.innerHTML = '<i class="fas fa-biohazard mr-2"></i> Attack In Progress...';
+                
+                // Add initial attack messages
+                addTerminalLine('> Exploiting CVE-2023-1234 in PACS system...', 1000);
+                addTerminalLine('> Bypassing authentication on EHR portal...', 2000);
+                addTerminalLine('> Elevating privileges to domain admin...', 3000);
+                addTerminalLine('> Disabling antivirus and backup services...', 4000);
+                addTerminalLine('> Deploying ransomware payload to all connected systems...', 5000);
+                
+                // Start encryption progress
+                let progress = 0;
+                const progressInterval = setInterval(function() {
+                    progress += 2;
+                    encryptionProgress.style.width = progress + '%';
+                    progressPercent.textContent = progress + '%';
+                    
+                    // Encrypt random files as progress increases
+                    if (progress % 10 === 0) {
+                        encryptRandomFiles(Math.floor(progress / 10));
+                    }
+                    
+                    // Update system status
+                    if (progress > 30) {
+                        monitoringStatus.textContent = 'Degraded';
+                        monitoringStatus.className = 'text-sm text-yellow-400';
+                    }
+                    if (progress > 50) {
+                        ehrStatus.textContent = 'Unavailable';
+                        ehrStatus.className = 'text-sm text-red-400';
+                    }
+                    if (progress > 70) {
+                        labStatus.textContent = 'Unavailable';
+                        labStatus.className = 'text-sm text-red-400';
+                    }
+                    if (progress > 85) {
+                        schedulingStatus.textContent = 'Unavailable';
+                        schedulingStatus.className = 'text-sm text-red-400';
+                    }
+                    
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                        completeAttack();
+                    }
+                }, 150);
+            });
+            
+            // Add line to terminal with delay
+            function addTerminalLine(text, delay) {
+                setTimeout(function() {
+                    const line = document.createElement('div');
+                    line.className = 'terminal-line';
+                    line.textContent = text;
+                    attackTerminal.appendChild(line);
+                    attackTerminal.scrollTop = attackTerminal.scrollHeight;
+                }, delay);
+            }
+            
+            // Encrypt random files
+            function encryptRandomFiles(count) {
+                const files = fileSystem.querySelectorAll('.file-item');
+                const filesToEncrypt = Math.min(count, files.length);
+                
+                for (let i = 0; i < filesToEncrypt; i++) {
+                    if (!files[i].classList.contains('encrypted')) {
+                        files[i].innerHTML = '<i class="fas fa-lock encrypted-icon"></i> <span class="encrypted-file">' + 
+                                            files[i].textContent.trim() + '.encrypted</span>';
+                        files[i].classList.add('encrypted');
+                    }
+                }
+            }
+            
+            // Complete the attack
+            function completeAttack() {
+                addTerminalLine('> Encryption complete! All critical systems compromised.', 100);
+                addTerminalLine('> Ransom note deployed to all workstations.', 200);
+                
+                setTimeout(function() {
+                    ransomModal.style.display = 'flex';
+                }, 1000);
+            }
+            
+            // Ransom modal buttons
+            payRansomBtn.addEventListener('click', function() {
+                ransomModal.style.display = 'none';
+                showRecoveryInfo('pay');
+            });
+            
+            contactBtn.addEventListener('click', function() {
+                addTerminalLine('> Victim attempted to contact attackers. Attackers did not respond.', 100);
+                ransomModal.style.display = 'none';
+            });
+            
+            recoverBtn.addEventListener('click', function() {
+                ransomModal.style.display = 'none';
+                showRecoveryInfo('recover');
+            });
+            
+            // Show recovery information
+            function showRecoveryInfo(option) {
+                recoveryModal.style.display = 'flex';
+                
+                if (option === 'pay') {
+                    document.getElementById('payOption').classList.remove('hidden');
+                    document.getElementById('recoverOption').classList.add('hidden');
+                } else {
+                    document.getElementById('payOption').classList.add('hidden');
+                    document.getElementById('recoverOption').classList.remove('hidden');
+                }
+            }
+            
+            // Close recovery modal
+            closeRecoveryBtn.addEventListener('click', function() {
+                recoveryModal.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>
