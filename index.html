@@ -472,10 +472,17 @@
                 showRecoveryInfo('pay');
             });
             
-            contactBtn.addEventListener('click', function() {
-                addTerminalLine('> Victim attempted to contact attackers. Attackers did not respond.', 100);
-                ransomModal.style.display = 'none';
-            });
+           contactBtn.addEventListener('click', function() {
+    addTerminalLine('> Victim attempted to contact attackers. Showing ransom instructions...', 100);
+    addTerminalLine('> Download Tor: https://www.torproject.org/', 100);
+    addTerminalLine('> Visit portal: http://blackcinder67x.onion', 100);
+    addTerminalLine('> ID: 9E4F-21X7-A1KZ-334L', 100);
+    addTerminalLine('> Email: support@blackcinder.mail', 100);
+    addTerminalLine('> Send 25 BTC to: bc1qxyz1234randomfakewalletaddress98765abcd1234', 100);
+    addTerminalLine('> Decryption key provided after payment.', 100);
+    ransomModal.style.display = 'none';
+});
+
             
             recoverBtn.addEventListener('click', function() {
                 ransomModal.style.display = 'none';
