@@ -115,13 +115,13 @@
                         <span>attack_terminal</span>
                     </div>
                     <div class="terminal-body" id="attackTerminal">
-                        <div class="terminal-line">Initializing healthcare system penetration...</div>
-                        <div class="terminal-line">Exploiting unpatched vulnerability in PACS system...</div>
-                        <div class="terminal-line">Bypassing firewall rules...</div>
-                        <div class="terminal-line">Establishing persistence...</div>
-                        <div class="terminal-line">Scanning network for valuable data...</div>
+                        <div class="terminal-line">Initializing attack via phishing email......</div>
+                        <div class="terminal-line"> Dumb person downloads malicious attachment (Emotet trojan)...</div>
+                        <div class="terminal-line">Installing Emotet and establishing persistence...</div>
+                        <div class="terminal-line">Downloading TrickBot for credential harvesting...</div>
+                        <div class="terminal-line">Scanning network and mapping connected systems...</div>
                         <div class="terminal-line">Found 3,427 patient records and 12 critical systems</div>
-                        <div class="terminal-line">Deploying ransomware payload...</div>
+                        <div class="terminal-line">Opening reverse shell to remote ransomware operators...</div>
                     </div>
                 </div>
                 
@@ -388,11 +388,11 @@
                 startAttackBtn.innerHTML = '<i class="fas fa-biohazard mr-2"></i> Attack In Progress...';
                 
                 // Add initial attack messages
-                addTerminalLine('> Exploiting CVE-2023-1234 in PACS system...', 1000);
-                addTerminalLine('> Bypassing authentication on EHR portal...', 2000);
+                addTerminalLine('> Uploading PSExec for remote code execution...', 1000);
+                addTerminalLine('> Elevating privileges to domain admin...', 2000);
                 addTerminalLine('> Elevating privileges to domain admin...', 3000);
                 addTerminalLine('> Disabling antivirus and backup services...', 4000);
-                addTerminalLine('> Deploying ransomware payload to all connected systems...', 5000);
+                addTerminalLine('> Deploying Ryuk ransomware payload to all systems...', 5000);
                 
                 // Start encryption progress
                 let progress = 0;
